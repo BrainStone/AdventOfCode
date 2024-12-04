@@ -1,13 +1,16 @@
 #include <filesystem>
 #include <iostream>
-#include <map>
 
 #include "solutions/day1.hpp"
+#include "solutions/day2.hpp"
 #include "util.hpp"
 
 // Mapping of all solution
 const std::unordered_map<std::string, std::function<std::string(std::istream&)>> solutions{
-    {"1_1", day1_1}, {"1_2", day1_2},  // Day 1 solutions
+    {"1_1", day1_1},
+    {"1_2", day1_2},
+    {"2_1", day2_1},
+    {"2_2", day2_2},
 };
 
 int main(int argc, char** argv) {
