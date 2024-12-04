@@ -1,5 +1,6 @@
 #include "day1.hpp"
 
+#include <algorithm>
 #include <tuple>
 #include <vector>
 

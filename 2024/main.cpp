@@ -3,13 +3,14 @@
 
 #include "solutions/day1.hpp"
 #include "solutions/day2.hpp"
+#include "solutions/day3.hpp"
 #include "util.hpp"
 
 #define PROBLEM_DAY(problem) {#problem "_1", day##problem##_1}, {#problem "_2", day##problem##_2},
 
 // Mapping of all solutions
-const std::unordered_map<std::string, std::function<std::string(std::istream&)>> solutions{PROBLEM_DAY(1)
-                                                                                               PROBLEM_DAY(2)};
+const std::unordered_map<std::string, std::function<std::string(std::istream&)>> solutions{PROBLEM_DAY(1) PROBLEM_DAY(2)
+                                                                                               PROBLEM_DAY(3)};
 
 int main(int argc, char** argv) {
 	// Change working dir to be relative to ourselves
