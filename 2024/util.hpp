@@ -5,7 +5,6 @@
 #include <memory>
 #include <string>
 
-using wrapped_istream =
-    std::unique_ptr<std::istream, std::function<void(std::istream *)>>;
+using wrapped_istream = std::unique_ptr<std::istream, std::function<void(std::istream*)>>;
 
-wrapped_istream open_input(const std::string &problem);
+wrapped_istream open_input(const std::string& problem);
