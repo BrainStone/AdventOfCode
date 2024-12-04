@@ -22,8 +22,6 @@ wrapped_istream open_input(const std::string& problem) {
 
 		return {&std::cin, [](std::istream*) {}};
 	}
-	
-	std::cout << problem_file << std::endl;
 
 	return {new std::ifstream{problem_file}, [](std::istream* ptr) { delete ptr; }};
 }
