@@ -3,6 +3,11 @@
 
 #include <filesystem>
 #include <iostream>
+#include <map>
+
+// Mapping of all solution
+const std::map<std::string, std::function<std::string(std::istream &)>>
+    solutions{{"1_1", day1_1}, {"1_2", day1_1}};
 
 int main() {
   // Change working dir to be relative to ourselves
@@ -10,8 +15,15 @@ int main() {
   std::filesystem::path exec_dir{exec.parent_path()};
 
   std::filesystem::current_path(exec_dir);
-  
-  std::cout << day1_1(*open_input("day1_1"));
+
+  std::string problem;
+  std::cout << "Which problem to run (format <day>_<problem>, like 12_2): ";
+  std::cin >> problem;
+  std::cout << std::endl;
+
+  std::string solution{solutions.at(problem)(*open_input(problem))};
+
+  std::cout << "\n\nSolution for day" << problem << ": " << solution;
 
   return 0;
 }

@@ -5,7 +5,7 @@
 #include <iostream>
 
 wrapped_istream open_input(const std::string &problem) {
-  std::filesystem::path target_file{"inputs/" + problem + ".txt"};
+  std::filesystem::path target_file{"inputs/day" + problem + ".txt"};
 
   if (is_regular_file(target_file)) {
     return {new std::ifstream{target_file},
