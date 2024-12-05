@@ -21,7 +21,7 @@ std::string day2_1(std::istream& input) {
 		input >> last_val;
 
 		// Only check if reading failed, which means we reached the end of the list
-		if (!input) break;
+		if (!input.good()) break;
 
 		// No further checks are necessary, because the data does indeed contain at least 2 values
 		input >> cur_val;
@@ -77,7 +77,7 @@ std::string day2_2(std::istream& input) {
 
 		input >> val;
 
-		if (!input) break;
+		if (!input.good()) break;
 
 		report.push_back(val);
 

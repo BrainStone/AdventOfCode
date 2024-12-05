@@ -11,7 +11,7 @@ std::tuple<std::vector<int>, std::vector<int>> read_lists(std::istream& input, b
 	while (true) {
 		input >> num1 >> num2;
 
-		if (!input) break;
+		if (!input.good()) break;
 
 		list1.push_back(num1);
 		list2.push_back(num2);
