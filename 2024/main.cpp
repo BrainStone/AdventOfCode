@@ -1,4 +1,6 @@
+#include <chrono>
 #include <filesystem>
+#include <iomanip>
 #include <iostream>
 
 #include "solutions/day1.hpp"
@@ -35,9 +37,13 @@ int main(int argc, char** argv) {
 		std::cout << "Selected problem day" << problem << " from CLI params." << std::endl;
 	}
 
+	const auto start = std::chrono::high_resolution_clock::now();
 	std::string solution{solutions.at(problem)(*open_input(problem))};
+	const auto end = std::chrono::high_resolution_clock::now();
 
-	std::cout << "\n\nSolution for day" << problem << ": " << solution << std::endl;
+	const std::chrono::duration<double> elapsed = end - start;
+	std::cout << "\n\nSolution for day" << problem << ": " << solution << "\nTime elapsed: " << std::fixed
+	          << std::setprecision(6) << elapsed << std::endl;
 
 	return 0;
 }
