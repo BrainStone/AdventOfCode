@@ -5,4 +5,5 @@ add_executable(${PROJECT_NAME} main.cpp util.cpp
         solutions/day2.cpp
         solutions/day3.cpp
         solutions/day4.cpp
+        solutions/day5.cpp
 )
