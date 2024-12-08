@@ -1,11 +1,13 @@
 #include "day5.hpp"
 
-#include <iostream>
+#include <functional>
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
 
-std::string day5_1(std::istream& input) {
+void process_input(
+    std::istream& input,
+    const std::function<void(const std::unordered_multimap<int, int>&, const std::vector<int>&)>& pages_processor) {
 	std::unordered_multimap<int, int> rules;
 
 	int before, after;
@@ -22,19 +24,26 @@ std::string day5_1(std::istream& input) {
 	// Skip empty line
 	input.ignore();
 
-	int sum = 0;
-	int read_page;
+	int page;
 	std::vector<int> pages;
-	std::unordered_set<int> seen;
 
 	while (input.peek() != '\n' && input.good()) {
 		pages.clear();
 
 		do {
-			input >> read_page;
-			pages.push_back(read_page);
+			input >> page;
+			pages.push_back(page);
 		} while (input.get() != '\n');
 
+		pages_processor(rules, pages);
+	}
+}
+
+std::string day5_1(std::istream& input) {
+	int sum = 0;
+	std::unordered_set<int> seen;
+
+	process_input(input, [&](const auto& rules, const auto& pages) {
 		seen.clear();
 
 		for (int page : pages) {
@@ -45,11 +54,11 @@ std::string day5_1(std::istream& input) {
 
 			seen.insert(page);
 		}
-		
+
 		sum += pages[pages.size() / 2];
 
 	invalid_pages:
-	}
+	});
 
 	return std::to_string(sum);
 }
