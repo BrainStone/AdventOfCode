@@ -2,7 +2,7 @@
 
 #include <array>
 #include <functional>
-#include <istream>
+#include <iostream>
 #include <memory>
 #include <string>
 
@@ -28,6 +28,8 @@ point& operator-=(point& lhs, const point& rhs);
 
 point operator*(const point& lhs, long long rhs);
 point& operator*=(point& lhs, long long rhs);
+
+std::ostream& operator<<(std::ostream& os, const point& rhs);
 
 class letter_grid {
 private:

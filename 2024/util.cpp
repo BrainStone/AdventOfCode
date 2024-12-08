@@ -59,6 +59,12 @@ point& operator*=(point& lhs, long long rhs) {
 	return lhs;
 }
 
+std::ostream& operator<<(std::ostream& os, const point& rhs) {
+	os << '(' << rhs[0] << ',' << rhs[1] << ')';
+
+	return os;
+}
+
 void letter_grid::check_line(const std::string& line) const {
 	if (grid.empty()) return;
 
