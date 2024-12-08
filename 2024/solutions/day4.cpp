@@ -1,7 +1,6 @@
 #include "day4.hpp"
 
 #include <array>
-#include <span>
 #include <vector>
 
 using point = typename std::array<long long, 2>;
@@ -154,5 +153,32 @@ std::string day4_1(std::istream& input) {
 }
 
 std::string day4_2(std::istream& input) {
-	return "";
+	letter_grid grid;
+	input >> grid;
+
+	constexpr std::string_view search{"XMAS"};
+	const size_t width = grid.width();
+	const size_t height = grid.height();
+	constexpr point dir_ne{-1, 1};
+	constexpr point dir_se{1, 1};
+	constexpr point dir_nw{-1, -1};
+	constexpr point dir_sw{1, -1};
+
+	int count = 0;
+
+	for (point cur{1, 1}; cur[0] < height - 1; ++cur[0]) {
+		for (cur[1] = 1; cur[1] < width - 1; ++cur[1]) {
+			if (grid[cur] != 'A') continue;
+			if (!((grid[cur + dir_ne] == 'M' && grid[cur + dir_sw] == 'S') ||
+			      (grid[cur + dir_ne] == 'S' && grid[cur + dir_sw] == 'M')))
+				continue;
+			if (!((grid[cur + dir_nw] == 'M' && grid[cur + dir_se] == 'S') ||
+			      (grid[cur + dir_nw] == 'S' && grid[cur + dir_se] == 'M')))
+				continue;
+
+			++count;
+		}
+	}
+
+	return std::to_string(count);
 }
