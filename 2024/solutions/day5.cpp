@@ -60,7 +60,7 @@ int day5_1(std::istream& input) {
 	invalid_pages:
 	});
 
-	return std::to_string(sum);
+	return sum;
 }
 
 // I'm sure there's a more efficient solution than just swapping the pages that violate a rule and then trying again
