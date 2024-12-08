@@ -63,6 +63,34 @@ std::string day5_1(std::istream& input) {
 	return std::to_string(sum);
 }
 
+// I'm sure there's a more efficient solution than just swapping the pages that violate a rule and then trying again
+// until the pages are in order. But it's by far the easiest to implement.
 std::string day5_2(std::istream& input) {
-	return "";
+	int sum = 0;
+	bool changed_order;
+	std::unordered_map<int, std::vector<int>::iterator> seen;
+
+	process_input(input, [&](const auto& rules, auto pages) {
+		changed_order = false;
+
+	check_for_out_of_order:
+		seen.clear();
+
+		for (auto page = pages.begin(); page != pages.end(); ++page) {
+			for (auto [it, rangeEnd] = rules.equal_range(*page); it != rangeEnd; ++it) {
+				// We've seen the page before, which isn't allowed! Reorder and start over
+				if (seen.contains(it->second)) {
+					std::iter_swap(page, seen[it->second]);
+					changed_order = true;
+					goto check_for_out_of_order;
+				}
+			}
+
+			seen.emplace(*page, page);
+		}
+
+		if (changed_order) sum += pages[pages.size() / 2];
+	});
+
+	return std::to_string(sum);
 }
