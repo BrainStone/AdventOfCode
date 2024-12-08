@@ -114,6 +114,23 @@ void letter_grid::add_line(std::string&& line) {
 	return (position[0] >= 0 && position[0] < this->height()) && (position[1] >= 0 && position[1] < this->width());
 }
 
+point letter_grid::find(char c) const {
+	const size_t height = this->height();
+	size_t res;
+
+	for (point cur{0, 0}; cur[0] < height; ++cur[0]) {
+		res = grid[cur[0]].find(c);
+
+		if (res != std::string::npos) {
+			cur[1] = (long long)res;
+
+			return cur;
+		}
+	}
+
+	return {-1, -1};
+}
+
 std::istream& operator>>(std::istream& is, letter_grid& grid) {
 	std::string line;
 
