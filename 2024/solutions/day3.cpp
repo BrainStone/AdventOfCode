@@ -1,10 +1,10 @@
-#include "day3.hpp"
-
 #include <limits>
+
+#include "../registry.hpp"
 
 constexpr auto max_size = std::numeric_limits<std::streamsize>::max();
 
-std::string day3_1(std::istream& input) {
+int day3_1(std::istream& input) {
 	int prod_sum = 0;
 	int num1, num2;
 	std::string instruction;
@@ -75,10 +75,10 @@ std::string day3_1(std::istream& input) {
 		prod_sum += num1 * num2;
 	}
 
-	return std::to_string(prod_sum);
+	return prod_sum;
 }
 
-std::string day3_2(std::istream& input) {
+int day3_2(std::istream& input) {
 	int prod_sum = 0;
 	int num1, num2;
 	int cur;
@@ -160,5 +160,7 @@ std::string day3_2(std::istream& input) {
 		}
 	}
 
-	return std::to_string(prod_sum);
+	return prod_sum;
 }
+
+REGISTER_DAY(3)

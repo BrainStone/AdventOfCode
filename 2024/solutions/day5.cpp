@@ -1,9 +1,9 @@
-#include "day5.hpp"
-
 #include <functional>
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
+
+#include "../registry.hpp"
 
 void process_input(
     std::istream& input,
@@ -39,7 +39,7 @@ void process_input(
 	}
 }
 
-std::string day5_1(std::istream& input) {
+int day5_1(std::istream& input) {
 	int sum = 0;
 	std::unordered_set<int> seen;
 
@@ -65,7 +65,7 @@ std::string day5_1(std::istream& input) {
 
 // I'm sure there's a more efficient solution than just swapping the pages that violate a rule and then trying again
 // until the pages are in order. But it's by far the easiest to implement.
-std::string day5_2(std::istream& input) {
+int day5_2(std::istream& input) {
 	int sum = 0;
 	bool changed_order;
 	std::unordered_map<int, std::vector<int>::iterator> seen;
@@ -92,5 +92,7 @@ std::string day5_2(std::istream& input) {
 		if (changed_order) sum += pages[pages.size() / 2];
 	});
 
-	return std::to_string(sum);
+	return sum;
 }
+
+REGISTER_DAY(5)

@@ -1,8 +1,8 @@
-#include "day1.hpp"
-
 #include <algorithm>
 #include <tuple>
 #include <vector>
+
+#include "../registry.hpp"
 
 std::tuple<std::vector<int>, std::vector<int>> read_lists(std::istream& input, bool sort = false) {
 	std::vector<int> list1, list2;
@@ -25,7 +25,7 @@ std::tuple<std::vector<int>, std::vector<int>> read_lists(std::istream& input, b
 	return {list1, list2};
 }
 
-std::string day1_1(std::istream& input) {
+int day1_1(std::istream& input) {
 	auto [list1, list2] = read_lists(input, true);
 
 	int diff = 0;
@@ -34,10 +34,10 @@ std::string day1_1(std::istream& input) {
 		diff += std::abs(list1[i] - list2[i]);
 	}
 
-	return std::to_string(diff);
+	return diff;
 }
 
-std::string day1_2(std::istream& input) {
+int day1_2(std::istream& input) {
 	auto [list1, list2] = read_lists(input, true);
 
 	int similarity = 0;
@@ -58,5 +58,7 @@ std::string day1_2(std::istream& input) {
 
 end:
 
-	return std::to_string(similarity);
+	return similarity;
 }
+
+REGISTER_DAY(1)

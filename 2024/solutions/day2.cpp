@@ -1,14 +1,13 @@
-#include "day2.hpp"
-
 #include <algorithm>
 #include <limits>
 #include <vector>
 
 #include "../range_helper.hpp"
+#include "../registry.hpp"
 
 constexpr auto max_size = std::numeric_limits<std::streamsize>::max();
 
-std::string day2_1(std::istream& input) {
+int day2_1(std::istream& input) {
 	int safe_reports = 0;
 
 	int last_val, cur_val;
@@ -53,7 +52,7 @@ std::string day2_1(std::istream& input) {
 		++safe_reports;
 	}
 
-	return std::to_string(safe_reports);
+	return safe_reports;
 }
 
 template <ranges::range_of<int> R>
@@ -65,7 +64,7 @@ bool is_report_safe(R&& report) {
 	       std::ranges::all_of(differences, [](int val) { return val <= -1 && val >= -3; });
 }
 
-std::string day2_2(std::istream& input) {
+int day2_2(std::istream& input) {
 	// Instead of adjusting the above code, we're changing the approach. Mainly because due to edge cases the above code
 	// would be a nightmare to adjust. But also because solving problems differently is fun.
 	int safe_reports = 0;
@@ -96,5 +95,7 @@ std::string day2_2(std::istream& input) {
 		}
 	}
 
-	return std::to_string(safe_reports);
+	return safe_reports;
 }
+
+REGISTER_DAY(2)

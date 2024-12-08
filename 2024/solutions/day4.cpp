@@ -1,8 +1,6 @@
-#include "day4.hpp"
-
-#include <array>
 #include <vector>
 
+#include "../registry.hpp"
 #include "../util.hpp"
 
 bool contains_needle_at(const letter_grid& grid, const std::string_view& needle, const point& loc, const point& dir) {
@@ -22,7 +20,7 @@ bool contains_needle_at(const letter_grid& grid, const std::string_view& needle,
 	return true;
 }
 
-std::string day4_1(std::istream& input) {
+int day4_1(std::istream& input) {
 	letter_grid grid;
 	input >> grid;
 
@@ -41,10 +39,10 @@ std::string day4_1(std::istream& input) {
 		}
 	}
 
-	return std::to_string(count);
+	return count;
 }
 
-std::string day4_2(std::istream& input) {
+int day4_2(std::istream& input) {
 	letter_grid grid;
 	input >> grid;
 
@@ -72,5 +70,7 @@ std::string day4_2(std::istream& input) {
 		}
 	}
 
-	return std::to_string(count);
+	return count;
 }
+
+REGISTER_DAY(4)
