@@ -20,14 +20,42 @@ struct std::hash<point> {
 	}
 };
 
-point operator+(const point& lhs, const point& rhs);
-point& operator+=(point& lhs, const point& rhs);
+constexpr point operator+(const point& lhs, const point& rhs) {
+	return {lhs[0] + rhs[0], lhs[1] + rhs[1]};
+}
 
-point operator-(const point& lhs, const point& rhs);
-point& operator-=(point& lhs, const point& rhs);
+constexpr point& operator+=(point& lhs, const point& rhs) {
+	lhs[0] += rhs[0];
+	lhs[1] += rhs[1];
 
-point operator*(const point& lhs, long long rhs);
-point& operator*=(point& lhs, long long rhs);
+	return lhs;
+}
+
+constexpr point operator-(const point& lhs, const point& rhs) {
+	return {lhs[0] - rhs[0], lhs[1] - rhs[1]};
+}
+
+constexpr point& operator-=(point& lhs, const point& rhs) {
+	lhs[0] -= rhs[0];
+	lhs[1] -= rhs[1];
+
+	return lhs;
+}
+
+constexpr point operator*(long long lhs, const point& rhs) {
+	return {lhs * rhs[0], lhs * rhs[1]};
+}
+
+constexpr point operator*(const point& lhs, long long rhs) {
+	return rhs * lhs;
+}
+
+constexpr point& operator*=(point& lhs, long long rhs) {
+	lhs[0] *= rhs;
+	lhs[1] *= rhs;
+
+	return lhs;
+}
 
 std::ostream& operator<<(std::ostream& os, const point& rhs);
 

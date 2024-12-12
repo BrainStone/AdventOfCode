@@ -26,39 +26,6 @@ wrapped_istream open_input(const std::string& problem) {
 	return {new std::ifstream{problem_file}, [](std::istream* ptr) { delete ptr; }};
 }
 
-point operator+(const point& lhs, const point& rhs) {
-	return {lhs[0] + rhs[0], lhs[1] + rhs[1]};
-}
-
-point& operator+=(point& lhs, const point& rhs) {
-	lhs[0] += rhs[0];
-	lhs[1] += rhs[1];
-
-	return lhs;
-}
-
-point operator-(const point& lhs, const point& rhs) {
-	return {lhs[0] - rhs[0], lhs[1] - rhs[1]};
-}
-
-point& operator-=(point& lhs, const point& rhs) {
-	lhs[0] -= rhs[0];
-	lhs[1] -= rhs[1];
-
-	return lhs;
-}
-
-point operator*(const point& lhs, long long rhs) {
-	return {lhs[0] * rhs, lhs[1] * rhs};
-}
-
-point& operator*=(point& lhs, long long rhs) {
-	lhs[0] *= rhs;
-	lhs[1] *= rhs;
-
-	return lhs;
-}
-
 std::ostream& operator<<(std::ostream& os, const point& rhs) {
 	os << '(' << rhs[0] << ',' << rhs[1] << ')';
 
