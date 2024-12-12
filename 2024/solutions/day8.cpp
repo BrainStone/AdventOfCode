@@ -67,7 +67,8 @@ private:
 	const Iterator end_;
 };
 
-int day8_1(std::istream& input) {
+int count_antinodes(std::istream& input, const std::function<void(const letter_grid&, std::unordered_set<point>&,
+                                                                  const point&, const point&)>& antinode_processor) {
 	std::unordered_multimap<char, point> antennas;
 	std::unordered_set<point> antinodes;
 	letter_grid grid;
@@ -94,9 +95,7 @@ int day8_1(std::istream& input) {
 			const auto& node1 = node1_pair.second;
 			const auto& node2 = node2_pair.second;
 
-			const point antinode = (2 * node1) - node2;
-
-			if (grid.is_valid_point(antinode)) antinodes.insert(antinode);
+			antinode_processor(grid, antinodes, node1, node2);
 		}
 
 		it = end;
@@ -105,8 +104,22 @@ int day8_1(std::istream& input) {
 	return (int)antinodes.size();
 }
 
+int day8_1(std::istream& input) {
+	return count_antinodes(input, [](const auto& grid, auto& antinodes, const auto& node1, const auto& node2) {
+		const point antinode = (2 * node1) - node2;
+
+		if (grid.is_valid_point(antinode)) antinodes.insert(antinode);
+	});
+}
+
 int day8_2(std::istream& input) {
-	return 0;
+	return count_antinodes(input, [](const auto& grid, auto& antinodes, const auto& node1, const auto& node2) {
+		const point difference = node1 - node2;
+
+		for (point antinode = node1; grid.is_valid_point(antinode); antinode += difference) {
+			antinodes.insert(antinode);
+		}
+	});
 }
 
 REGISTER_DAY(8)
