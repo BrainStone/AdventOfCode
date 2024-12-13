@@ -25,17 +25,13 @@ int day4_1(std::istream& input) {
 	input >> grid;
 
 	constexpr std::string_view search{"XMAS"};
-	const size_t width = grid.width();
-	const size_t height = grid.height();
 	constexpr std::array<point, 8> dirs{point{0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1}, {-1, -1}, {-1, 0}, {-1, 1}};
 
 	int count = 0;
 
-	for (point cur{0, 0}; cur[0] < height; ++cur[0]) {
-		for (cur[1] = 0; cur[1] < width; ++cur[1]) {
-			for (const point& dir : dirs) {
-				if (contains_needle_at(grid, search, cur, dir)) ++count;
-			}
+	for (point cur{0, 0}; grid.is_valid_point(cur); cur = grid.next_point(cur)) {
+		for (const point& dir : dirs) {
+			if (contains_needle_at(grid, search, cur, dir)) ++count;
 		}
 	}
 

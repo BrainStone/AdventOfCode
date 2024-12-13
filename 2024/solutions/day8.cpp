@@ -74,18 +74,14 @@ int count_antinodes(std::istream& input, const std::function<void(const letter_g
 	letter_grid grid;
 	input >> grid;
 
-	const size_t width = grid.width();
-	const size_t height = grid.height();
 	char node;
 
-	for (point cur{0, 0}; cur[0] < height; ++cur[0]) {
-		for (cur[1] = 0; cur[1] < width; ++cur[1]) {
-			node = grid[cur];
+	for (point cur{0, 0}; grid.is_valid_point(cur); cur = grid.next_point(cur)) {
+		node = grid[cur];
 
-			if (node == '.') continue;
+		if (node == '.') continue;
 
-			antennas.emplace(node, cur);
-		}
+		antennas.emplace(node, cur);
 	}
 
 	for (auto it = antennas.begin(); it != antennas.end();) {

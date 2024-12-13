@@ -9,6 +9,8 @@
 using wrapped_istream = std::unique_ptr<std::istream, std::function<void(std::istream*)>>;
 using point = std::array<long long, 2>;
 
+constexpr point INVALID_POINT{-1, -1};
+
 wrapped_istream open_input(const std::string& problem);
 
 template <>
@@ -81,7 +83,8 @@ public:
 	[[nodiscard]] const char& operator[](const point& position) const;
 
 	[[nodiscard]] bool is_valid_point(const point& position) const;
-	[[nodiscard]] point find(char c) const;
+	[[nodiscard]] point next_point(const point& position) const;
+	[[nodiscard]] point find(char c, const point& start = {0, 0}) const;
 };
 
 std::istream& operator>>(std::istream& is, letter_grid& grid);
