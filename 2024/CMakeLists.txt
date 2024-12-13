@@ -1,7 +1,7 @@
 project(aoc_2024)
 
 # Define the number of days
-set(NUM_DAYS 10)
+set(NUM_DAYS 11)
 
 # Create a list of solution files dynamically
 set(SOLUTION_FILES)
