@@ -2,8 +2,9 @@
 
 #include <array>
 #include <functional>
-#include <iostream>
+#include <istream>
 #include <memory>
+#include <ostream>
 #include <string>
 #include <utility>
 
