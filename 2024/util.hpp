@@ -5,6 +5,7 @@
 #include <iostream>
 #include <memory>
 #include <string>
+#include <utility>
 
 using wrapped_istream = std::unique_ptr<std::istream, std::function<void(std::istream*)>>;
 using point = std::array<long long, 2>;
@@ -18,7 +19,16 @@ struct std::hash<point> {
 	constexpr std::size_t operator()(const point& p) const noexcept {
 		std::size_t h1 = std::hash<long long>{}(p[0]);
 		std::size_t h2 = std::hash<long long>{}(p[1]);
-		return h1 + 0x9e3779b9 + (h2 << 6) + (h2 >> 2);
+		return h1 + 0x9e3779b9U + (h2 << 6) + (h2 >> 2);
+	}
+};
+
+template <typename T1, typename T2>
+struct std::hash<std::pair<T1, T2>> {
+	constexpr std::size_t operator()(const std::pair<T1, T2>& p) const noexcept {
+		std::size_t h1 = std::hash<T1>{}(p.first);
+		std::size_t h2 = std::hash<T2>{}(p.second);
+		return h1 + 0x9e3779b9U + (h2 << 6) + (h2 >> 2);
 	}
 };
 
