@@ -17,14 +17,14 @@ wrapped_istream open_input(const std::string& problem);
 template <>
 struct std::hash<point> {
 	constexpr std::size_t operator()(const point& p) const noexcept {
-		std::size_t h1 = std::hash<long long>{}(p[0]);
-		std::size_t h2 = std::hash<long long>{}(p[1]);
+		std::size_t h1 = std::hash<point::value_type>{}(p[0]);
+		std::size_t h2 = std::hash<point::value_type>{}(p[1]);
 		return h1 + 0x9e3779b9U + (h2 << 6) + (h2 >> 2);
 	}
 };
 
 template <typename T1, typename T2>
-struct std::hash<std::pair<T1, T2>> {
+struct std::hash<std::pair<T1, T2>> {  // NOLINT(*-dcl58-cpp)
 	constexpr std::size_t operator()(const std::pair<T1, T2>& p) const noexcept {
 		std::size_t h1 = std::hash<T1>{}(p.first);
 		std::size_t h2 = std::hash<T2>{}(p.second);
@@ -54,17 +54,28 @@ constexpr point& operator-=(point& lhs, const point& rhs) {
 	return lhs;
 }
 
-constexpr point operator*(long long lhs, const point& rhs) {
+constexpr point operator*(point::value_type lhs, const point& rhs) {
 	return {lhs * rhs[0], lhs * rhs[1]};
 }
 
-constexpr point operator*(const point& lhs, long long rhs) {
+constexpr point operator*(const point& lhs, point::value_type rhs) {
 	return rhs * lhs;
 }
 
-constexpr point& operator*=(point& lhs, long long rhs) {
+constexpr point& operator*=(point& lhs, point::value_type rhs) {
 	lhs[0] *= rhs;
 	lhs[1] *= rhs;
+
+	return lhs;
+}
+
+constexpr point operator/(const point& lhs, point::value_type rhs) {
+	return {lhs[0] / rhs, lhs[1] / rhs};
+}
+
+constexpr point& operator/=(point& lhs, point::value_type rhs) {
+	lhs[0] /= rhs;
+	lhs[1] /= rhs;
 
 	return lhs;
 }
