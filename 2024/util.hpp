@@ -12,6 +12,11 @@ using wrapped_istream = std::unique_ptr<std::istream, std::function<void(std::is
 using point = std::array<long long, 2>;
 
 constexpr point INVALID_POINT{-1, -1};
+constexpr point NORTH{-1, 0};
+constexpr point EAST{0, 1};
+constexpr point SOUTH{1, 0};
+constexpr point WEST{0, -1};
+constexpr std::array<point, 4> CARDINAL_DIRS{NORTH, EAST, SOUTH, WEST};
 
 wrapped_istream open_input(const std::string& problem);
 

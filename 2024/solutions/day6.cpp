@@ -6,7 +6,6 @@
 
 int day6_1(std::istream& input) {
 	int dir = 0;
-	std::array<point, 4> dirs{point{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
 	std::unordered_set<point> unique_pos;
 
 	letter_grid grid;
@@ -16,13 +15,13 @@ int day6_1(std::istream& input) {
 
 	while (grid.is_valid_point(cur)) {
 		if (grid[cur] == '#') {
-			cur -= dirs[dir];
+			cur -= CARDINAL_DIRS[dir];
 			dir = (dir + 1) % 4;
 			continue;
 		}
 
 		unique_pos.insert(cur);
-		cur += dirs[dir];
+		cur += CARDINAL_DIRS[dir];
 	}
 
 	return (int)unique_pos.size();
@@ -31,7 +30,6 @@ int day6_1(std::istream& input) {
 int day6_2(std::istream& input) {
 	int possible_new_obstructions = 0;
 	int dir = 0;
-	std::array<point, 4> dirs{point{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
 	std::unordered_map<point, unsigned short> visited_pos;
 
 	letter_grid grid;
@@ -50,7 +48,7 @@ int day6_2(std::istream& input) {
 
 		while (grid.is_valid_point(cur)) {
 			if (grid[cur] == '#') {
-				cur -= dirs[dir];
+				cur -= CARDINAL_DIRS[dir];
 				dir = (dir + 1) % 4;
 				continue;
 			}
@@ -63,7 +61,7 @@ int day6_2(std::istream& input) {
 				break;
 			}
 
-			cur += dirs[dir];
+			cur += CARDINAL_DIRS[dir];
 		}
 
 		grid[obs] = '.';

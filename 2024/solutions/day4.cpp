@@ -45,10 +45,10 @@ int day4_2(std::istream& input) {
 	constexpr std::string_view search{"XMAS"};
 	const size_t width = grid.width();
 	const size_t height = grid.height();
-	constexpr point dir_ne{-1, 1};
-	constexpr point dir_se{1, 1};
-	constexpr point dir_nw{-1, -1};
-	constexpr point dir_sw{1, -1};
+	constexpr point dir_ne{NORTH + EAST};
+	constexpr point dir_se{SOUTH + EAST};
+	constexpr point dir_nw{NORTH + WEST};
+	constexpr point dir_sw{SOUTH + WEST};
 
 	int count = 0;
 

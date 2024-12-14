@@ -18,8 +18,6 @@ int calculate_trail_scores(std::istream& input,
 
 // NOLINTNEXTLINE(*-no-recursion)
 void ascend(const letter_grid& grid, const point& pos, const std::function<void(const point&)>& peak_handler) {
-	constexpr std::array<point, 4> dirs{point{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
-
 	const char height = grid[pos];
 
 	// We found a peak, handle it
@@ -31,7 +29,7 @@ void ascend(const letter_grid& grid, const point& pos, const std::function<void(
 
 	const char next_height = (char)(height + 1);
 
-	for (const point& dir : dirs) {
+	for (const point& dir : CARDINAL_DIRS) {
 		const point new_pos = pos + dir;
 
 		if (grid.is_valid_point(new_pos) && (grid[new_pos] == next_height)) ascend(grid, new_pos, peak_handler);
